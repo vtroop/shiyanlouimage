@@ -12,5 +12,12 @@
   </head>
   <body>
   $END$
+  <a href="hello">hello world</a>
+
+  <br>
+
+  <form action="/test/hello_post" method="post">
+    <input type="submit" value="submit">
+  </form>
   </body>
 </html>
