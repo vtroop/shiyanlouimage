@@ -111,7 +111,7 @@ public class HelloWorld {
      * @return
      */
     @RequestMapping(value = "/testPOJO")
-    public String testPOJO(UserDAO userDAO) {
+    public String testPOJO(UserEntity userDAO) {
         System.out.println(userDAO);
         return SUCCESS;
     }
