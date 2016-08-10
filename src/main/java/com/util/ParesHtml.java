@@ -1,4 +1,4 @@
-package com.parse;
+package com.util;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -52,7 +52,7 @@ public class ParesHtml {
     }
 
     public void imageURLtrans(Element element) {
-        String url = element.attr("src");
+        String url = element.attr("src2");
         System.out.println(url);
         Matcher matcher = Pattern.compile("[^/]*\\.jpg").matcher(url);
         if (matcher.find()) {

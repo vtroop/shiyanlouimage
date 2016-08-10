@@ -10,10 +10,22 @@ import javax.servlet.http.HttpServletResponse;
  * Created by Evilina on 2016/7/29.
  */
 public class HelloController implements Controller {
+    private ModelAndView modelAndView;
+
+    /**
+     * 这个是在dispatcherServlet.xml里进行映射的，
+     * 映射的url是"/hi"
+     * 目标返回是modelandview可以包含
+     * springmvc会把modelandview中的model中数据放入到request域对象中
+     * @param httpServletRequest
+     * @param httpServletResponse
+     * @return
+     * @throws Exception
+     */
     @Override
     public ModelAndView handleRequest(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("message", "hi");
+        modelAndView = new ModelAndView();
+        modelAndView.addObject("message", "hi2");
         modelAndView.setViewName("hi");
         return modelAndView;
     }

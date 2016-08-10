@@ -1,9 +1,8 @@
 package com.parse;
 
+import com.util.ParesHtml;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by Evilina on 2016/7/30.
