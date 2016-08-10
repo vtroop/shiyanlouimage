@@ -14,6 +14,7 @@ public class ImageEntity {
     private String url;
     private Timestamp date;
     private Integer userId;
+    private UserEntity userByUserId;
 
     @Id
     @Column(name = "id")
@@ -89,5 +90,15 @@ public class ImageEntity {
         result = 31 * result + (date != null ? date.hashCode() : 0);
         result = 31 * result + (userId != null ? userId.hashCode() : 0);
         return result;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    public UserEntity getUserByUserId() {
+        return userByUserId;
+    }
+
+    public void setUserByUserId(UserEntity userByUserId) {
+        this.userByUserId = userByUserId;
     }
 }

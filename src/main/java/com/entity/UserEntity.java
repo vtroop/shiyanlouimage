@@ -1,6 +1,7 @@
 package com.entity;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * Created by Evilina on 2016/7/31.
@@ -11,6 +12,7 @@ public class UserEntity {
     private int id;
     private String username;
     private String password;
+    private Collection<ImageEntity> imagesById;
 
     public UserEntity(int id, String username, String password) {
         this.id = id;
@@ -86,5 +88,14 @@ public class UserEntity {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    @OneToMany(mappedBy = "userByUserId")
+    public Collection<ImageEntity> getImagesById() {
+        return imagesById;
+    }
+
+    public void setImagesById(Collection<ImageEntity> imagesById) {
+        this.imagesById = imagesById;
     }
 }
