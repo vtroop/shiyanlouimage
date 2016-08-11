@@ -29,7 +29,7 @@ public class UserEntity {
     }
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
@@ -40,7 +40,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "username")
+    @Column(name = "username", nullable = true, length = 16)
     public String getUsername() {
         return username;
     }
@@ -50,7 +50,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "password")
+    @Column(name = "password", nullable = true, length = 16)
     public String getPassword() {
         return password;
     }

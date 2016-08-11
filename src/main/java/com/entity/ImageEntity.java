@@ -17,7 +17,7 @@ public class ImageEntity {
     private UserEntity userByUserId;
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     public int getId() {
         return id;
     }
@@ -27,7 +27,7 @@ public class ImageEntity {
     }
 
     @Basic
-    @Column(name = "name")
+    @Column(name = "name", nullable = true, length = 16)
     public String getName() {
         return name;
     }
@@ -37,7 +37,7 @@ public class ImageEntity {
     }
 
     @Basic
-    @Column(name = "url")
+    @Column(name = "url", nullable = true, length = 255)
     public String getUrl() {
         return url;
     }
@@ -47,7 +47,7 @@ public class ImageEntity {
     }
 
     @Basic
-    @Column(name = "date")
+    @Column(name = "date", nullable = true)
     public Timestamp getDate() {
         return date;
     }
