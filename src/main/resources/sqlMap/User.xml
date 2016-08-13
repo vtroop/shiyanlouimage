@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace命名空间，对sql进行分类管理，对sql进行隔离-->
+<mapper namespace="test">
+    <!--mappedStatement的id 精准查询-->
+    <select id="findUserById" parameterType="int" resultType="com.entity.UserEntity">
+        SELECT * from shiyanloudb.user WHERE id=#{id};
+    </select>
+    <!--模糊查询
+        ${id}拼接字符串 在程序把接收到的参数不加任何修饰
+        不安全，可能引起sql注入,值只能为value-->
+    <select id="findUserByName" parameterType="java.lang.String" resultType="com.entity.UserEntity">
+        SELECT * FROM shiyanloudb.user WHERE username LIKE '%${value}%'
+    </select>
+</mapper>

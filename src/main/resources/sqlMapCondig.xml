@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!--没有spring整合时，暂时使用-->
+<environments default="development">
+    <environment id="development">
+        <transactionManager type="JDBC"></transactionManager>
+        <dataSource type="POOLED">
+            <property name="driver" value="com.mysql.jdbc.Driver"/>
+            <property name="url" value="jdbc:mysql:///shiyanloudb"/>
+            <property name="username" value="root"/>
+            <property name="password" value="19941126"/>
+        </dataSource>
+    </environment>
+
+</environments>
+
+    <!-- Continue going here -->
+<mappers>
+    <mapper resource="sqlMap/User.xml"/>
+</mappers>
+
+</configuration>
