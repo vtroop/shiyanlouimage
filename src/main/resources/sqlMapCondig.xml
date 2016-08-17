@@ -3,32 +3,56 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+
+    <!--属性配置也有顺序-->
     <!--加载属性配置文件-->
     <properties resource="db.properties">
     </properties>
-<!--没有spring整合时，暂时使用-->
-<environments default="development">
-    <environment id="development">
-        <transactionManager type="JDBC"></transactionManager>
-        <dataSource type="POOLED">
-            <property name="driver" value="${jdbc.driver}"/>
-            <property name="url" value="${jdbc.url}"/>
-            <property name="username" value="${jdbc.username}"/>
-            <property name="password" value="${jdbc.password}"/>
-        </dataSource>
-    </environment>
-</environments>
-    <!---->
-    <!--<settings>-->
-        <!--<setting name="lazyLoadingEnabled" value="true"/>-->
-        <!--<setting name="aggressiveLazyLoading" value="false"/>-->
-    <!--</settings>-->
 
-    <!-- Continue going here -->
-<mappers>
-    <mapper resource="mapper/userMapper.xml"/>
-    <mapper resource="mapper/imageMapper.xml"/>
-    <mapper resource="mapper/contentMapper.xml"/>
-</mappers>
+    <!---->
+    <settings>
+        <!--开启延迟加载-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!--积极加载设为false，改为按需加载-->
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
+
+<!--    <typeAliases>
+        &lt;!&ndash;单个别名type类型的路径，类型的别名&ndash;&gt;
+        <typeAlias type="com.entity.UserEntity" alias="UserEntity"/>
+        &lt;!&ndash;批量别名，指定包名，mybatis会自动扫描po类，自动定义别名，别名就是类名，首字母大写小写都可以。&ndash;&gt;
+        <package name="com.entity"/>
+    </typeAliases>-->
+
+    <!--没有spring整合时，暂时使用-->
+    <environments default="development">
+        <environment id="development">
+            <!--事务管理-->
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+        <!-- Continue going here -->
+    <mappers>
+        <!--单个映射文件加载-->
+        <!--<mapper resource="sqlMap/User.xml"/>-->
+        <mapper resource="sqlMap/UserMapper.xml"/>
+        <mapper resource="sqlMap/ContentMapper.xml"/>
+        <mapper resource="sqlMap/ImageMapper.xml"/>
+
+
+        <!--或者可以通过class（Mapper接口）加载
+        需要将mapper接口的类名和mapper.xml文件名保持一致，且在一个目录中
+        前提是使用mapper代理的方法-->
+        <!--<mapper class="com.mapper.ContentMapper"/>-->
+        <!--可以使用批量加载，指定mapper接口的包名，mybatis自动扫描-->
+        <!--<package name="com.mapper"/>-->
+    </mappers>
 
 </configuration>
