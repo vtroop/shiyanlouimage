@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.ImageMapper">
+    <resultMap id="imageMap" type="com.entity.ImageMybatis">
+        <!--配置的映射信息-->
+        <!--id指定查询的唯一标识，column标识image中的唯一标识
+        property标识pojo的哪一个属性-->
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="url" property="url"/>
+        <result column="date" property="date"/>
+        <result column="user_id" property="userId"/>
+
+        <!--用于映射关联查询的单个信息，property是映射到image哪个属性-->
+        <association property="userEntity" javaType="com.entity.UserEntity">
+            <id column="id" property="id"/>
+            <result column="username" property="username"/>
+            <result column="password" property="password"/>
+        </association>
+    </resultMap>
+
+    <select id="findImageById" resultMap="imageMap">
+SELECT
+	*
+FROM
+	image,
+	USER
+WHERE
+	image.id = `user`.id
+    </select>
+</mapper>

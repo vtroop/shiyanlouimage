@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--namespace命名空间，对sql进行分类管理，对sql进行隔离-->
-<mapper namespace="test">
+<mapper namespace="com.mapper.UserMapper">
     <!--mappedStatement的id 精准查询-->
     <select id="findUserById" parameterType="int" resultType="com.entity.UserEntity">
         SELECT * from shiyanloudb.user WHERE id=#{id};

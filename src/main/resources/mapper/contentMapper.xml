@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.ContentMapper">
+    <resultMap id="contentMap" type="com.entity.ContentEntity">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="url" property="url"/>
+        <result column="date" property="date"/>
+        <result column="body" property="body"/>
+        <result column="update_body" property="updateBody"/>
+        <!--将关联查询的多条记录映射到collection，
+        property对应着pojo的属性
+        ofType指定集合属性中的pojo类型-->
+        <collection property="contentDetailedsById" ofType="com.entity.ContentDetailedEntity">
+            <id column="did" property="id"/>
+            <result column="dname" property="name"/>
+            <result column="content_id" property="contentId"/>
+            <result column="dbody" property="body"/>
+            <result column="dupdate_body" property="updateBody"/>
+            <result column="ddate" property="date"/>
+
+        </collection>
+
+    </resultMap>
+    <select id="findContent" resultMap="contentMap">
+        SELECT
+	content.id,
+	content.`name`,
+	content.url,
+	content.date,
+	content.body,
+	content.update_body,
+	content_detailed.id did,
+	content_detailed.content_id,
+	content_detailed.`name` dname,
+	content_detailed.body dbody,
+	content_detailed.update_body dupdatebody,
+	content_detailed.date ddate
+FROM
+	content
+INNER JOIN content_detailed ON content_detailed.content_id = content.id
+    </select>
+</mapper>
