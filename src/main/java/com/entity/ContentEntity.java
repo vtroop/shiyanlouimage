@@ -1,6 +1,7 @@
 package com.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Collection;
 
@@ -9,7 +10,7 @@ import java.util.Collection;
  */
 @Entity
 @Table(name = "content", schema = "shiyanloudb", catalog = "")
-public class ContentEntity {
+public class ContentEntity implements Serializable{
     private int id;
     private String name;
     private String url;

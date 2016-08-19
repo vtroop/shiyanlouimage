@@ -1,5 +1,6 @@
 package com.mapper;
 
+import com.entity.ContentDetailedEntity;
 import com.entity.ContentEntity;
 
 import java.util.List;
@@ -9,4 +10,10 @@ import java.util.List;
  */
 public interface ContentMapper {
     public List<ContentEntity> findContent();
+
+    public List<ContentEntity> findContentByName(ContentEntity contentEntity);
+
+    public ContentEntity findContentById(int id);
+
+    public List<ContentDetailedEntity> findContentDetailedLazyLoading();
 }

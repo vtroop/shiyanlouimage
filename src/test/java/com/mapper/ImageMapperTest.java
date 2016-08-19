@@ -6,14 +6,11 @@ import com.entity.ImageMybatis;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.hibernate.SessionFactory;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.InputStream;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by Evilina on 2016/8/16.
@@ -23,7 +20,7 @@ public class ImageMapperTest {
     public void setUp() throws Exception {
         if (sqlSessionFactory == null)
         {
-            InputStream inputStream = Resources.getResourceAsStream("sqlMapCondig.xml");
+            InputStream inputStream = Resources.getResourceAsStream("mybatis/sqlMapConfig.xml");
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             System.out.println("zhixinglejici");
             userMapper = sqlSessionFactory.openSession().getMapper(ImageMapper.class);
