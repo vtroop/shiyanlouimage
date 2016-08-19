@@ -21,10 +21,10 @@
     <!--c3p0配置dataSource-->
     <bean id="dataSource_c3p0" class="com.mchange.v2.c3p0.ComboPooledDataSource"
     destroy-method="close"
-          p:driverClass="#{jdbc.driver}"
-          p:jdbcUrl="#{jdbc.url}"
-          p:user="#{jdbc.username}"
-          p:password="#{jdbc.password}"
+          p:driverClass="${jdbc.driver}"
+          p:jdbcUrl="${jdbc.url}"
+          p:user="${jdbc.username}"
+          p:password="${jdbc.password}"
           p:maxPoolSize="40"
           p:minPoolSize="2"
           p:initialPoolSize="2"
@@ -34,10 +34,10 @@
 
     <!--dbcp的datasource-->
     <bean id="dataSource_dbcp" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
-        <property name="driverClassName" value="#{jdbc.driver}" />
-        <property name="url" value="#{jdbc.url}" />
-        <property name="username" value="#{jdbc.username}" />
-        <property name="password" value="#{jdbc.password}" />
+        <property name="driverClassName" value="${jdbc.driver}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
         <!-- 初始化连接大小 -->
         <property name="initialSize" value="5"></property>
         <!-- 连接池最大数量 -->
@@ -76,7 +76,12 @@
     <!--整合mybatis，sqlSessionFactory-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <!--来加载配置-->
-        <property name="configLocation" value="mybatis/sqlMapConfig.xml"/>
+        <property name="configLocation" value="classpath:mybatis/sqlMapConfig.xml"/>
         <property name="dataSource" ref="dataSource_dbcp"/>
+    </bean>
+
+    <!--原始mybatis的dao接口-->
+    <bean id="userDao" class="com.dao.UserDaoImpl">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
 </beans>

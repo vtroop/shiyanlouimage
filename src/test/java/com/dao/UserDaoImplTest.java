@@ -6,6 +6,9 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.InputStream;
 
@@ -15,14 +18,14 @@ import static org.junit.Assert.*;
  * Created by Evilina on 2016/8/14.
  */
 public class UserDaoImplTest {
-    @Before
+//    @Before
     public void setUp() throws Exception {
         if (sqlSessionFactory == null)
         {
             InputStream inputStream = Resources.getResourceAsStream("sqlMapCondig.xml");
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             System.out.println("zhixinglejici");
-            userDao = new UserDaoImpl(sqlSessionFactory);
+            userDao = new UserDaoImpl();
 
         }
     }
@@ -42,6 +45,13 @@ public class UserDaoImplTest {
     @Test
     public void deleteUser() throws Exception {
         userDao.deleteUser(7);
+    }
+
+    @Test
+    public void integratedSpring() throws Exception {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext.xml");
+        UserDao userDao = (UserDao) applicationContext.getBean("userDao");
+        System.out.println(userDao.findUserById(1));
     }
 
 }

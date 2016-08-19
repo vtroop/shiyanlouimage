@@ -3,11 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-
-    <!--属性配置也有顺序-->
-    <!--加载属性配置文件-->
+<!--已经被spring整合
+    &lt;!&ndash;属性配置也有顺序&ndash;&gt;
+    &lt;!&ndash;加载属性配置文件&ndash;&gt;
     <properties resource="mybatis/db.properties">
-    </properties>
+    </properties>-->
 
     <!---->
     <settings>
@@ -26,10 +26,11 @@
         <package name="com.entity"/>
     </typeAliases>
 
-    <!--没有spring整合时，暂时使用-->
+<!-- 已经被spring整合
+    &lt;!&ndash;没有spring整合时，暂时使用&ndash;&gt;
     <environments default="development">
         <environment id="development">
-            <!--事务管理-->
+            &lt;!&ndash;事务管理&ndash;&gt;
             <transactionManager type="JDBC"></transactionManager>
             <dataSource type="POOLED">
                 <property name="driver" value="${jdbc.driver}"/>
@@ -38,7 +39,7 @@
                 <property name="password" value="${jdbc.password}"/>
             </dataSource>
         </environment>
-    </environments>
+    </environments>-->
 
         <!-- Continue going here -->
     <mappers>
