@@ -73,7 +73,7 @@ public class HelloWorld {
         return "success";
     }
 
-    @RequestMapping(value = "/hello_post", method = RequestMethod.POST)
+    @RequestMapping(value = "/hello_post", method = {RequestMethod.POST})
     public String helloPost() {
         System.out.println("post");
         return SUCCESS;

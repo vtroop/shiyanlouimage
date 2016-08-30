@@ -56,7 +56,10 @@
         前提是使用mapper代理的方法-->
         <!--<mapper class="com.mapper.ContentMapper"/>-->
         <!--可以使用批量加载，指定mapper接口的包名，mybatis自动扫描-->
-        <package name="com.mapper"/>
+
+<!--    被spring的mapper扫描替代-->
+        <!--<package name="com.mapper"/>-->
+
     </mappers>
 
 </configuration>

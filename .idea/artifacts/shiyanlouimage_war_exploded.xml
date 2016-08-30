@@ -57,6 +57,10 @@
           <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-core:2.6.1" />
           <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-api:2.6.1" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-log4j12:1.7.21" />
+          <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.8.9" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-aspects:4.3.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.aspectj:aspectjrt:1.8.9" />
+          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="shiyanlouimage/web/Web" />

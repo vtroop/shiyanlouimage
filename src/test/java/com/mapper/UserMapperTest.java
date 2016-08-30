@@ -1,11 +1,14 @@
 package com.mapper;
 
 import com.dao.UserDao;
+import com.entity.UserEntity;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.InputStream;
 
@@ -15,7 +18,7 @@ import java.io.InputStream;
 public class UserMapperTest {
     @Before
     public void setUp() throws Exception {
-        if (sqlSessionFactory == null)
+        if (sqlSessionFactory != null)
         {
             InputStream inputStream = Resources.getResourceAsStream("mybatis/sqlMapConfig.xml");
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
@@ -29,7 +32,10 @@ public class UserMapperTest {
 
     @Test
     public void findUserById() throws Exception {
-        System.out.println(userMapper.findUserById(1));
+        //System.out.println(userMapper.findUserById(1));
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext.xml");
+        UserMapper userEntity = (UserMapper) applicationContext.getBean("userMapper");
+        System.out.println(userEntity.findUserById(1));
     }
 
     @Test

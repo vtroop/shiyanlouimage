@@ -25,7 +25,9 @@ public class HelloController implements Controller {
     @Override
     public ModelAndView handleRequest(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
         modelAndView = new ModelAndView();
+        //向modelandview放置数据
         modelAndView.addObject("message", "hi2");
+        //创建视图名
         modelAndView.setViewName("hi");
         return modelAndView;
     }

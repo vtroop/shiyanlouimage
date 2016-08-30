@@ -48,14 +48,15 @@ INNER JOIN content_detailed ON content_detailed.content_id = content.id
     经验之谈，一般是基于单表来定义sql片段，这样的话，sql片段可重用性才高
     同时，sql片段不要包括where-->
     <sql id="query_where_content">
-
-            <if test="name!=null">
-                AND content.name = #{name}
+        <if test="contentExpand!=null">
+            <if test="contentExpand.name!=null and contentExpand.name!=''">
+                AND content.name LIKE '%${contentExpand.name}%'
             </if>
+        </if>
 
     </sql>
 
-    <select id="findContentByName" parameterType="ContentEntity" resultType="ContentEntity">
+    <select id="findContentByName" parameterType="ContentVo" resultType="ContentExpand">
         SELECT * FROM content
         <where>
             <!--引用sql片段-->

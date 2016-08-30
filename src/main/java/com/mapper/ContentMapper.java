@@ -2,6 +2,7 @@ package com.mapper;
 
 import com.entity.ContentDetailedEntity;
 import com.entity.ContentEntity;
+import com.entity.ContentVo;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
 public interface ContentMapper {
     public List<ContentEntity> findContent();
 
-    public List<ContentEntity> findContentByName(ContentEntity contentEntity);
+    public List<ContentEntity> findContentByName(ContentVo contentVo);
 
     public ContentEntity findContentById(int id);
 

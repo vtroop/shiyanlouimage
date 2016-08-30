@@ -80,8 +80,24 @@
         <property name="dataSource" ref="dataSource_dbcp"/>
     </bean>
 
-    <!--原始mybatis的dao接口-->
+<!--    &lt;!&ndash;原始mybatis的dao接口&ndash;&gt;
     <bean id="userDao" class="com.dao.UserDaoImpl">
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>-->
+
+<!--由下面的mapper批量扫描替代    &lt;!&ndash;mapper代理接口&ndash;&gt;
+    <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.mapper.UserMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>-->
+
+    <!--mapper的批量扫描，可以取消sqlConfig.xml里的扫描
+    自动扫面出来的mapper的bean的id为mapper类名的首字母小写
+    如果扫描多个包，不能使用通配符，使用逗号，来分割多个包名-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--指定扫描的包名-->
+        <property name="basePackage" value="com.mapper"/>
+        <!--下面不用sqlSessionFactory ref的原因，如果用了，会导致不能加载db.properties-->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 </beans>

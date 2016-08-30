@@ -3,13 +3,15 @@
   <component name="FacetManager">
     <facet type="Spring" name="Spring">
       <configuration>
-        <fileset id="fileset" name="Spring Application Context" removed="false">
-          <file>file://$MODULE_DIR$/web/WEB-INF/dispatcherServlet-servlet.xml</file>
-          <file>file://$MODULE_DIR$/web/WEB-INF/applicationContext.xml</file>
-        </fileset>
         <fileset id="web application context" name="MVC application context" removed="true" />
         <fileset id="web dispatcherServlet servlet context" name="MVC dispatcherServlet servlet context" removed="true">
           <file>file://$MODULE_DIR$/web/dispatcherServlet-servlet.xml</file>
+        </fileset>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/src/main/resources/spring/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring/dispatcherServlet-servlet.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring/applicationContext-transaction.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring/applicationContext-service.xml</file>
         </fileset>
       </configuration>
     </facet>
@@ -58,11 +60,11 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:4.3.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-web:4.3.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-orm:4.3.2.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:4.3.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:4.3.2.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:4.3.2.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-aspects:4.3.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-jpa:1.9.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-commons:1.11.4.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.aspectj:aspectjrt:1.8.7" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.13" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.slf4j:jcl-over-slf4j:1.7.13" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:javax.servlet-api:4.0.0-b01" level="project" />
@@ -99,5 +101,9 @@
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-api:2.6.1" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-log4j12:1.7.21" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
+    <orderEntry type="library" name="Maven: org.aspectj:aspectjweaver:1.8.9" level="project" />
+    <orderEntry type="library" name="Maven: org.aspectj:aspectjrt:1.8.9" level="project" />
+    <orderEntry type="library" name="Maven: javax.servlet:jstl:1.2" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-test:4.3.2.RELEASE" level="project" />
   </component>
 </module>

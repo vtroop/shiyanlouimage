@@ -11,10 +11,16 @@
                                 expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
     </context:component-scan>
 
+    <!--将bean的name作为url进行查找（非注解的方法）-->
     <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
 
+    <!--处理器适配器（非注解的方法：要求实现controller接口 ）-->
     <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
 
+    <!--&lt;!&ndash;注解方法的映射器和适配器，可由    <mvc:annotation-driven/>代替&ndash;&gt;
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
+-->
     <!--配置试图解析器 handler返回值解析成物理视图-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/"></property>
