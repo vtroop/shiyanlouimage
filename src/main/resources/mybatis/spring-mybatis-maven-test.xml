@@ -8,25 +8,14 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-    <context:component-scan base-package="com" use-default-filters="false">
-        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-        <context:exclude-filter type="annotation"
-                                expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
-    </context:component-scan>
-
-    <context:component-scan base-package="com.service.impl"></context:component-scan>
-
-    <!--加载db配置-->
-    <context:property-placeholder location="classpath:mybatis/db.properties"/>
-
 
     <!--c3p0配置dataSource-->
     <bean id="dataSource_c3p0" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-    destroy-method="close"
-          p:driverClass="${jdbc.driver}"
-          p:jdbcUrl="${jdbc.url}"
-          p:user="${jdbc.username}"
-          p:password="${jdbc.password}"
+          destroy-method="close"
+          p:driverClass="com.mysql.jdbc.Driver"
+          p:jdbcUrl="jdbc:mysql:///shiyanloudb"
+          p:user="root"
+          p:password="19941126"
           p:maxPoolSize="40"
           p:minPoolSize="2"
           p:initialPoolSize="2"
@@ -36,10 +25,10 @@
 
     <!--dbcp的datasource-->
     <bean id="dataSource_dbcp" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
-        <property name="driverClassName" value="${jdbc.driver}" />
-        <property name="url" value="${jdbc.url}" />
-        <property name="username" value="${jdbc.username}" />
-        <property name="password" value="${jdbc.password}" />
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql:///spider?useUnicode=true&amp;characterEncoding=utf8" />
+        <property name="username" value="root" />
+        <property name="password" value="19941126" />
         <!-- 初始化连接大小 -->
         <property name="initialSize" value="5"></property>
         <!-- 连接池最大数量 -->
@@ -54,29 +43,29 @@
 
     <!--dbcp的datasource-->
 
-<!--
+    <!--
 
-    <bean id="entityManagerFactory"
-          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="dataSource" ref="dataSource" />
+        <bean id="entityManagerFactory"
+              class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+            <property name="dataSource" ref="dataSource" />
 
-        <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"/>
-        <property name="persistenceUnitName" value="MyPU" />
-        <property name="jpaVendorAdapter">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <property name="showSql" value="false" />
-                <property name="generateDdl" value="false" />
-            </bean>
-        </property>
-    </bean>
+            <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"/>
+            <property name="persistenceUnitName" value="MyPU" />
+            <property name="jpaVendorAdapter">
+                <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                    <property name="showSql" value="false" />
+                    <property name="generateDdl" value="false" />
+                </bean>
+            </property>
+        </bean>
 
-    &lt;!&ndash; 事务管理 &ndash;&gt;
-    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="entityManagerFactory"/>
-    </bean>
-    &lt;!&ndash; 开启事务管理注解 &ndash;&gt;
-    <tx:annotation-driven transaction-manager="transactionManager"/>
--->
+        &lt;!&ndash; 事务管理 &ndash;&gt;
+        <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+            <property name="entityManagerFactory" ref="entityManagerFactory"/>
+        </bean>
+        &lt;!&ndash; 开启事务管理注解 &ndash;&gt;
+        <tx:annotation-driven transaction-manager="transactionManager"/>
+    -->
 
     <!--整合mybatis，sqlSessionFactory-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -85,16 +74,16 @@
         <property name="dataSource" ref="dataSource_dbcp"/>
     </bean>
 
-<!--    &lt;!&ndash;原始mybatis的dao接口&ndash;&gt;
-    <bean id="userDao" class="com.dao.UserDaoImpl">
-        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
-    </bean>-->
+    <!--    &lt;!&ndash;原始mybatis的dao接口&ndash;&gt;
+        <bean id="userDao" class="com.dao.UserDaoImpl">
+            <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+        </bean>-->
 
-<!--由下面的mapper批量扫描替代    &lt;!&ndash;mapper代理接口&ndash;&gt;
-    <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="mapperInterface" value="com.mapper.UserMapper"/>
-        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
-    </bean>-->
+    <!--由下面的mapper批量扫描替代    &lt;!&ndash;mapper代理接口&ndash;&gt;
+        <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+            <property name="mapperInterface" value="com.mapper.UserMapper"/>
+            <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+        </bean>-->
 
     <!--mapper的批量扫描，可以取消sqlConfig.xml里的扫描
     自动扫面出来的mapper的bean的id为mapper类名的首字母小写

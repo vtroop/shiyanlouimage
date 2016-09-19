@@ -1,10 +1,16 @@
 package com.controller;
 
 import com.entity.ContentEntity;
+import com.gen.entity.Content;
+import com.gen.entity.ContentDetailedWithBLOBs;
+import com.gen.mapper.ContentDetailedMapper;
 import com.service.ContentService;
+import com.service.NewContentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,14 +25,17 @@ import java.util.List;
 @RequestMapping(value = "/content")
 public class ContentController {
     @Autowired
-    private ContentService contentServiceImpl;
+    private NewContentService newContentService;
 
-    @RequestMapping(value = "/query")
-    public ModelAndView query() throws Exception {
+    @Autowired
+    private ContentDetailedMapper contentDetailedMapper;
+
+    @RequestMapping(value = "/query/{id}")
+    public ModelAndView query(@PathVariable int id) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
-        List<ContentEntity> contentEntities = contentServiceImpl.findContentByName(null);
+        Content contentEntities = newContentService.selectByPrimaryKey(id);
         modelAndView.addObject("contentEntities", contentEntities);
-        modelAndView.setViewName("content/contentList");
+        modelAndView.setViewName("content/queryContentResult");
         return modelAndView;
     }
 
@@ -36,5 +45,13 @@ public class ContentController {
         model.addAttribute("test", "test");
 
         return "edit";
+    }
+
+    @RequestMapping(value = "/querycontentdetail/{id}")
+    public String queryContentDetail(Model model, @PathVariable int id) {
+
+        ContentDetailedWithBLOBs contentDetailedWithBLOBs = contentDetailedMapper.selectByPrimaryKey(id);
+        model.addAttribute("detail", contentDetailedWithBLOBs);
+        return "content/queryContentDetailResult";
     }
 }

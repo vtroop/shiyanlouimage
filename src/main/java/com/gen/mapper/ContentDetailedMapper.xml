@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gen.mapper.ContentDetailedMapper">
+  <resultMap id="BaseResultMap" type="com.gen.entity.ContentDetailed">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="content_id" jdbcType="INTEGER" property="contentId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="image_number" jdbcType="INTEGER" property="imageNumber" />
+    <result column="body_md5" jdbcType="INTEGER" property="bodyMd5" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.gen.entity.ContentDetailedWithBLOBs">
+    <result column="body_raw" jdbcType="LONGVARCHAR" property="bodyRaw" />
+    <result column="body_fixed" jdbcType="LONGVARCHAR" property="bodyFixed" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, content_id, update_time, image_number, body_md5
+  </sql>
+  <sql id="Blob_Column_List">
+    body_raw, body_fixed
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from content_detailed
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from content_detailed
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gen.entity.ContentDetailedWithBLOBs">
+<!--生成主键-->
+    <selectKey keyProperty="id" resultType="int" order="BEFORE">
+      select nextval('content_detailed')
+    </selectKey>
+    insert into content_detailed (id, content_id, update_time, 
+      image_number, body_md5, body_raw, 
+      body_fixed)
+    values (#{id,jdbcType=INTEGER}, #{contentId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{imageNumber,jdbcType=INTEGER}, #{bodyMd5,jdbcType=INTEGER}, #{bodyRaw,jdbcType=LONGVARCHAR}, 
+      #{bodyFixed,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gen.entity.ContentDetailedWithBLOBs">
+    <!--生成主键-->
+    <selectKey keyProperty="id" resultType="int" order="BEFORE">
+      select nextval('content_detailed')
+    </selectKey>
+    insert into content_detailed
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="contentId != null">
+        content_id,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="imageNumber != null">
+        image_number,
+      </if>
+      <if test="bodyMd5 != null">
+        body_md5,
+      </if>
+      <if test="bodyRaw != null">
+        body_raw,
+      </if>
+      <if test="bodyFixed != null">
+        body_fixed,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="contentId != null">
+        #{contentId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imageNumber != null">
+        #{imageNumber,jdbcType=INTEGER},
+      </if>
+      <if test="bodyMd5 != null">
+        #{bodyMd5,jdbcType=INTEGER},
+      </if>
+      <if test="bodyRaw != null">
+        #{bodyRaw,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bodyFixed != null">
+        #{bodyFixed,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gen.entity.ContentDetailedWithBLOBs">
+    update content_detailed
+    <set>
+      <if test="contentId != null">
+        content_id = #{contentId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imageNumber != null">
+        image_number = #{imageNumber,jdbcType=INTEGER},
+      </if>
+      <if test="bodyMd5 != null">
+        body_md5 = #{bodyMd5,jdbcType=INTEGER},
+      </if>
+      <if test="bodyRaw != null">
+        body_raw = #{bodyRaw,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bodyFixed != null">
+        body_fixed = #{bodyFixed,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.gen.entity.ContentDetailedWithBLOBs">
+    update content_detailed
+    set content_id = #{contentId,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      image_number = #{imageNumber,jdbcType=INTEGER},
+      body_md5 = #{bodyMd5,jdbcType=INTEGER},
+      body_raw = #{bodyRaw,jdbcType=LONGVARCHAR},
+      body_fixed = #{bodyFixed,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gen.entity.ContentDetailed">
+    update content_detailed
+    set content_id = #{contentId,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      image_number = #{imageNumber,jdbcType=INTEGER},
+      body_md5 = #{bodyMd5,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gen.mapper.ImageMapper">
+  <resultMap id="BaseResultMap" type="com.gen.entity.Image">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="content_detail_id" jdbcType="INTEGER" property="contentDetailId" />
+    <result column="size" jdbcType="DOUBLE" property="size" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, content_detail_id, size, type, path, update_time, url
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from image
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from image
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gen.entity.Image">
+    <!--生成主键-->
+    <selectKey keyProperty="id" resultType="int" order="BEFORE">
+      select nextval('image')
+    </selectKey>
+    insert into image (id, content_detail_id, size, 
+      type, path, update_time, 
+      url)
+    values (#{id,jdbcType=INTEGER}, #{contentDetailId,jdbcType=INTEGER}, #{size,jdbcType=DOUBLE}, 
+      #{type,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{url,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gen.entity.Image">
+    <!--生成主键-->
+    <selectKey keyProperty="id" resultType="int" order="BEFORE">
+      select nextval('image')
+    </selectKey>
+    insert into image
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="contentDetailId != null">
+        content_detail_id,
+      </if>
+      <if test="size != null">
+        size,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="contentDetailId != null">
+        #{contentDetailId,jdbcType=INTEGER},
+      </if>
+      <if test="size != null">
+        #{size,jdbcType=DOUBLE},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gen.entity.Image">
+    update image
+    <set>
+      <if test="contentDetailId != null">
+        content_detail_id = #{contentDetailId,jdbcType=INTEGER},
+      </if>
+      <if test="size != null">
+        size = #{size,jdbcType=DOUBLE},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gen.entity.Image">
+    update image
+    set content_detail_id = #{contentDetailId,jdbcType=INTEGER},
+      size = #{size,jdbcType=DOUBLE},
+      type = #{type,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      url = #{url,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

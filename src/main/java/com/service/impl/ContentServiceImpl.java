@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by Evilina on 2016/8/23.
  */
-@Service
+
 public class ContentServiceImpl implements ContentService {
     @Autowired
     private ContentMapper contentMapper;

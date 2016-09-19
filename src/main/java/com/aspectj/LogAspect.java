@@ -9,5 +9,14 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class LogAspect {
+    public void sayBefore() {
+        System.out.println("the before");
+
+    }
+
+    public void sayAfter() {
+        System.out.println("the after");
+
+    }
 
 }
